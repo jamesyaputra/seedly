@@ -1,3 +1,11 @@
+.logo {
+    width: 70px !important;
+}
+
 .search {
     margin: auto;
+}
+
+.joinButton {
+    font-weight: bolder !important;
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Menu, Responsive, Search } from 'semantic-ui-react';
-import styles from './Navbar.module.css';
+import { Menu } from 'semantic-ui-react';
+import styles from './Topics.module.css';
 
-export class Navbar extends Component {
+export class Topics extends Component {
   state = {}
 
   handleItemClick = (e, { name }) => {
@@ -14,15 +14,12 @@ export class Navbar extends Component {
 
     return (
       <Menu
+        className={styles.sidebar}
+        vertical
         borderless
-        size='large'>
-        <Menu.Item
-          name='Home'
-          active={activeItem === 'Home'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          <img className={styles.logo} src='https://f.seedly.sg/logo/seedly-logo-blue.png' />
+        size='medium'>
+        <Menu.Item className={styles.topicsTitle}>
+          Featured Topics
         </Menu.Item>
         
         <Menu.Item
@@ -87,29 +84,9 @@ export class Navbar extends Component {
         >
           Content
         </Menu.Item>
-
-        <Menu.Menu position='right'>
-          <Search
-            className={styles.search}
-            size='small'
-            placeholder='Search for anything'
-          />
-
-          <Menu.Item>
-            <Button
-              className={styles.joinButton}
-              basic
-              primary
-              circular
-              color='blue'
-            >
-              Join
-            </Button>
-          </Menu.Item>
-        </Menu.Menu>
       </Menu>
     )
   }
 }
 
-export default Navbar;
+export default Topics;
