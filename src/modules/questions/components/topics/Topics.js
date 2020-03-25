@@ -16,8 +16,7 @@ export class Topics extends Component {
       <Menu
         className={styles.sidebar}
         vertical
-        borderless
-        size='medium'>
+        borderless>
         <Menu.Item className={styles.topicsTitle}>
           Featured Topics
         </Menu.Item>

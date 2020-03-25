@@ -8,7 +8,7 @@ export class QuestionCard extends Component {
       <Card fluid>
         <Card.Content extra>
           <Label>COVID-19</Label>
-          <Label>COVID-19</Label>
+          <Label>Debt</Label>
         </Card.Content>
         <Card.Content>
           <Card.Header>My parents are in debt and I give the bulk of my salary to them. The rest of my salary is used to pay off my own university loans, transport, phone bills, insurance. How do I help my family live more comfortably and reduce our debt?</Card.Header>
