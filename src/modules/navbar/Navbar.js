@@ -14,6 +14,7 @@ export class Navbar extends Component {
 
     return (
       <Menu
+        className={styles.navbar}
         borderless
         size='large'>
         <Menu.Item
