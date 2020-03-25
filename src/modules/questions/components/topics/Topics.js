@@ -17,6 +17,15 @@ export class Topics extends Component {
         className={styles.sidebar}
         vertical
         borderless>
+        <Menu.Item
+          name='all'
+          active={activeItem === 'all'}
+          color='blue'
+          onClick={this.handleItemClick}
+        >
+          All Questions
+        </Menu.Item>
+        
         <Menu.Item className={styles.topicsTitle}>
           Featured Topics
         </Menu.Item>

@@ -3,6 +3,12 @@ import { Card, Image, Label } from 'semantic-ui-react';
 import styles from './QuestionCard.module.css';
 
 export class QuestionCard extends Component {
+  state = {}
+
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+  }
+  
   render() {
     return (
       <Card fluid>
