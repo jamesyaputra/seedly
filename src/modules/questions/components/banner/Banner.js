@@ -8,12 +8,7 @@ export class Banner extends Component {
       <div className={styles.banner}>
         <div className={styles.title}>Personal Finance</div>
         <div className={styles.description}>All you need to know about managing your wealth</div>
-        <Button
-          circular
-          color='blue'
-          size='huge'>
-          ASK A QUESTION
-        </Button>
+        <div className={styles.button}>ASK A QUESTION</div>
       </div>
     )
   }
