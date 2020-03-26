@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 
 // Components
 import { Card, Image } from 'semantic-ui-react';
@@ -8,12 +9,12 @@ import { Card, Image } from 'semantic-ui-react';
 import styles from './QuestionCard.module.css';
 
 // Redux
-import { fetchQuestions }from '../../app/actions/questions';
+import { fetchQuestions }from '../../../../app/actions/questions';
 import {
   getQuestions,
   getQuestionsError,
   getQuestionsPending
-} from '../../app/reducers/questions';
+} from '../../../../app/reducers/questions';
 
 const mapStateToProps = state => ({
   error: getQuestionsError(state),
@@ -21,7 +22,8 @@ const mapStateToProps = state => ({
   pending: getQuestionsPending(state)
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({fetchQuestions}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchQuestions: fetchQuestions}, dispatch)
 
 class QuestionCard extends Component {
   componentWillMount() {
@@ -29,14 +31,21 @@ class QuestionCard extends Component {
     fetchQuestions(topic);
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.topic !== this.props.topic) {
+      const { topic, fetchQuestions } = this.props;
+      fetchQuestions(topic);
+    }
+  }
+
   render() {
     const { questions } = this.props;
     return (
       <div>
-        {questions.map(question => {
+        {questions.questions.topics?.map(question => {
           const { content, answer, numAnswer } = question;
           return (
-            <Card fluid>
+            <Card key={question.id} fluid>
               <Card.Content>
                 <Card.Header>{content}</Card.Header>
                 <Card.Meta>{numAnswer} answers</Card.Meta>

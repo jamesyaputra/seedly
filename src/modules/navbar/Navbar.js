@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Menu, Responsive, Search } from 'semantic-ui-react';
+import { Button, Menu, Search } from 'semantic-ui-react';
 import styles from './Navbar.module.css';
 
-export class Navbar extends Component {
+class Navbar extends Component {
   state = {}
 
   handleItemClick = (e, { name }) => {
@@ -23,7 +23,7 @@ export class Navbar extends Component {
           color='blue'
           onClick={this.handleItemClick}
         >
-          <img className={styles.logo} src='https://f.seedly.sg/logo/seedly-logo-blue.png' />
+          <img className={styles.logo} src='https://f.seedly.sg/logo/seedly-logo-blue.png' alt='logo'/>
         </Menu.Item>
         
         <Menu.Item

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+
 // Components
 import { Menu } from 'semantic-ui-react';
 
@@ -8,12 +9,12 @@ import { Menu } from 'semantic-ui-react';
 import styles from './Topics.module.css';
 
 // Redux
-import { fetchTopics }from '../../app/actions/topics';
+import { fetchTopics }from '../../../../app/actions/topics';
 import {
   getTopics,
   getTopicsError,
   getTopicsPending
-} from '../../app/reducers/topics';
+} from '../../../../app/reducers/topics';
 
 const mapStateToProps = state => ({
   error: getTopicsError(state),
@@ -21,39 +22,35 @@ const mapStateToProps = state => ({
   pending: getTopicsPending(state)
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({fetchTopics}, dispatch)
-
 class Topics extends Component {
   state = {}
 
   componentWillMount() {
-    this.props.fetchTopics();
+    this.props.fetchTopics() ;
   };
-
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
-    this.props.onSelectTopic(name);
-  }
 
   render() {
     const { activeItem } = this.state;
     const { topics } = this.props;
-
     return (
       <Menu
         className={styles.sidebar}
         vertical
         borderless>
         
-        {topics.map((topic) => {
+        {topics.topics.topics?.map((topic) => {
           return (
             <Menu.Item
+              key={topic.id}
               name={topic.id}
               active={activeItem === topic.id}
               color='blue'
-              onClick={this.handleItemClick}
+              onClick={(e, {name}) => {
+                this.setState({ activeItem: name })
+                this.props.onSelectTopic(name, topic.title, topic.description);
+              }}
             >
-              topic.title
+              {topic.title}
             </Menu.Item>
           )
         })}
@@ -64,5 +61,5 @@ class Topics extends Component {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Topics);
+  { fetchTopics }
+) (Topics);
