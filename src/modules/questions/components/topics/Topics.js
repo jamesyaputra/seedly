@@ -1,100 +1,68 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+// Components
 import { Menu } from 'semantic-ui-react';
+
+// Styles
 import styles from './Topics.module.css';
 
-export class Topics extends Component {
+// Redux
+import { fetchTopics }from '../../app/actions/topics';
+import {
+  getTopics,
+  getTopicsError,
+  getTopicsPending
+} from '../../app/reducers/topics';
+
+const mapStateToProps = state => ({
+  error: getTopicsError(state),
+  topics: getTopics(state),
+  pending: getTopicsPending(state)
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({fetchTopics}, dispatch)
+
+class Topics extends Component {
   state = {}
+
+  componentWillMount() {
+    this.props.fetchTopics();
+  };
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name })
+    this.props.onSelectTopic(name);
   }
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem } = this.state;
+    const { topics } = this.props;
 
     return (
       <Menu
         className={styles.sidebar}
         vertical
         borderless>
-        <Menu.Item
-          name='all'
-          active={activeItem === 'all'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          All Questions
-        </Menu.Item>
         
-        <Menu.Item className={styles.topicsTitle}>
-          Featured Topics
-        </Menu.Item>
-        
-        <Menu.Item
-          name='banking'
-          active={activeItem === 'banking'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          Banking
-        </Menu.Item>
-
-        <Menu.Item
-          name='cards'
-          active={activeItem === 'cards'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          Cards
-        </Menu.Item>
-
-        <Menu.Item
-          name='investments'
-          active={activeItem === 'investments'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          Investments
-        </Menu.Item>
-
-        <Menu.Item
-          name='utilitiesAndBills'
-          active={activeItem === 'utilitiesAndBills'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          Utilities & Bills
-        </Menu.Item>
-
-        <Menu.Item
-          name='insurance'
-          active={activeItem === 'insurance'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          Insurance
-        </Menu.Item>
-
-        <Menu.Item
-          name='community'
-          active={activeItem === 'community'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          Community
-        </Menu.Item>
-
-        <Menu.Item
-          name='content'
-          active={activeItem === 'content'}
-          color='blue'
-          onClick={this.handleItemClick}
-        >
-          Content
-        </Menu.Item>
+        {topics.map((topic) => {
+          return (
+            <Menu.Item
+              name={topic.id}
+              active={activeItem === topic.id}
+              color='blue'
+              onClick={this.handleItemClick}
+            >
+              topic.title
+            </Menu.Item>
+          )
+        })}
       </Menu>
     )
   }
 }
 
-export default Topics;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Topics);

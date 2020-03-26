@@ -38,3 +38,7 @@ export default function topicsReducer(state = initialState, action) {
       return state;
   }
 }
+
+export const getTopics = state => state.topics;
+export const getTopicsPending = state => state.pending;
+export const getTopicsError = state => state.error;
