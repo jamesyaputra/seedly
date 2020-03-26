@@ -4,6 +4,8 @@
 
 .navbar {
     margin-bottom: 0 !important;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .search {
