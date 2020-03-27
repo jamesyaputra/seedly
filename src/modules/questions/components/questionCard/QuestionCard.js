@@ -8,12 +8,12 @@ import { Card, Image, Loader } from 'semantic-ui-react';
 import styles from './QuestionCard.module.css';
 
 // Redux
-import { fetchQuestions }from '../../../../app/actions/questions';
+import { fetchQuestions }from '../../../../actions/questions';
 import {
   getQuestions,
   getQuestionsError,
   getQuestionsPending
-} from '../../../../app/reducers/questions';
+} from '../../../../reducers/questions';
 
 const mapStateToProps = state => ({
   error: getQuestionsError(state),

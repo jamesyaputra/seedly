@@ -9,12 +9,12 @@ import { Menu } from 'semantic-ui-react';
 import styles from './Topics.module.css';
 
 // Redux
-import { fetchTopics }from '../../../../app/actions/topics';
+import { fetchTopics }from '../../../../actions/topics';
 import {
   getTopics,
   getTopicsError,
   getTopicsPending
-} from '../../../../app/reducers/topics';
+} from '../../../../reducers/topics';
 
 const mapStateToProps = state => ({
   error: getTopicsError(state),
