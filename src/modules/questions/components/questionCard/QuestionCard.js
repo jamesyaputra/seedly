@@ -36,7 +36,6 @@ class QuestionCard extends Component {
 
   render() {
     const { questions, pending } = this.props;
-    debugger;
     return (
       <>
         {questions.topics?.map(question => {

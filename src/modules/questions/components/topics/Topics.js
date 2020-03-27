@@ -29,6 +29,13 @@ class Topics extends Component {
     this.props.fetchTopics() ;
   };
 
+  componentDidUpdate(prevProps) {
+    const { topics, onSelectTopic } = this.props;
+    if (prevProps.topics !== topics) {
+      onSelectTopic(topics.topics[0]?.id, topics.topics[0]?.title, topics.topics[0]?.description);
+    }
+  };
+
   render() {
     const { activeItem } = this.state;
     const { topics } = this.props;
@@ -46,7 +53,7 @@ class Topics extends Component {
               active={activeItem === topic.id}
               color='blue'
               onClick={(e, {name}) => {
-                this.setState({ activeItem: name })
+                this.setState({ activeItem: name });
                 this.props.onSelectTopic(name, topic.title, topic.description);
               }}
             >
