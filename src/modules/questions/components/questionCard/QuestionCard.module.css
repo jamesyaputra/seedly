@@ -1,3 +1,8 @@
 .userStatus {
     color: #2970dc !important;
 }
+
+.loader {
+    margin-top: 10%  !important;
+    margin-bottom: 10% !important;
+}

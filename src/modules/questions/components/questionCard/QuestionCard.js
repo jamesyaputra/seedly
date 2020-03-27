@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
 
 // Components
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Loader } from 'semantic-ui-react';
 
 // Styles
 import styles from './QuestionCard.module.css';
@@ -22,9 +21,6 @@ const mapStateToProps = state => ({
   pending: getQuestionsPending(state)
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchQuestions: fetchQuestions}, dispatch)
-
 class QuestionCard extends Component {
   componentWillMount() {
     const { topic, fetchQuestions } = this.props;
@@ -39,39 +35,48 @@ class QuestionCard extends Component {
   }
 
   render() {
-    const { questions } = this.props;
+    const { questions, pending } = this.props;
+    debugger;
     return (
-      <div>
-        {questions.questions.topics?.map(question => {
+      <>
+        {questions.topics?.map(question => {
           const { content, answer, numAnswer } = question;
           return (
             <Card key={question.id} fluid>
               <Card.Content>
-                <Card.Header>{content}</Card.Header>
-                <Card.Meta>{numAnswer} answers</Card.Meta>
-                <Card fluid>
-                  <Card.Content>
-                    <Image
-                      circular
-                      floated='left'
-                      size='mini'
-                      src={answer.user.picUrl}
-                    />
-                    <Card.Header>{answer.user.name}</Card.Header>
-                    <Card.Meta className={styles.userStatus} floated='right'>Level {answer.user.level}</Card.Meta>
-                    <Card.Description>{answer.content}</Card.Description>
-                  </Card.Content>
-                </Card>
+                {
+                  pending ? 
+                  <div className={styles.loader}>
+                    <Loader size='big' active />
+                  </div> :
+                  <>
+                    <Card.Header>{content}</Card.Header>
+                    <Card.Meta>{numAnswer} answers</Card.Meta>
+                    <Card fluid>
+                      <Card.Content>
+                        <Image
+                          circular
+                          floated='left'
+                          size='mini'
+                          src={answer.user.picUrl}
+                        />
+                        <Card.Header>{answer.user.name}</Card.Header>
+                        <Card.Meta className={styles.userStatus} floated='right'>Level {answer.user.level}</Card.Meta>
+                        <Card.Description>{answer.content}</Card.Description>
+                      </Card.Content>
+                    </Card>
+                  </>
+                }
               </Card.Content>
             </Card>
           )
         })}
-      </div>
+      </>
     )
   }
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { fetchQuestions }
 )(QuestionCard);

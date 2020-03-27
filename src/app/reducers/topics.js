@@ -39,6 +39,6 @@ export default function topicsReducer(state = initialState, action) {
   }
 }
 
-export const getTopics = state => state.topics;
-export const getTopicsPending = state => state.pending;
-export const getTopicsError = state => state.error;
+export const getTopics = state => state.topics.topics;
+export const getTopicsPending = state => state.topics.pending;
+export const getTopicsError = state => state.topics.error;

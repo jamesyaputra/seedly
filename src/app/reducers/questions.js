@@ -39,6 +39,6 @@ export default function questionsReducer(state = initialState, action) {
   }
 }
 
-export const getQuestions = state => state.questions;
-export const getQuestionsPending = state => state.pending;
-export const getQuestionsError = state => state.error;
+export const getQuestions = state => state.questions.questions;
+export const getQuestionsPending = state => state.questions.pending;
+export const getQuestionsError = state => state.questions.error;

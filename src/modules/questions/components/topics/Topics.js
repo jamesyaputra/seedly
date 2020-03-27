@@ -38,7 +38,7 @@ class Topics extends Component {
         vertical
         borderless>
         
-        {topics.topics.topics?.map((topic) => {
+        {topics.topics?.map((topic) => {
           return (
             <Menu.Item
               key={topic.id}
